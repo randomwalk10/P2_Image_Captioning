@@ -1,3 +1,9 @@
 
 *.out
 .ipynb_checkpoints
+training_log.txt
+*.pkl
+models
+__pycache__
+*.html
+*.zip
