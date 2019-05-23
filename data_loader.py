@@ -20,10 +20,7 @@ def get_loader(transform,
                unk_word="<unk>",
                vocab_from_file=True,
                num_workers=0,
-               # run on udacity env
-               # cocoapi_loc='/opt'):
-               # run on local env
-               cocoapi_loc='/mnt'):
+               cocoapi_loc='/opt'):
     """Returns the data loader. If the mode is "train", return a data loader
     with data of the same caption length that is randomly chosen
     Args:
@@ -47,22 +44,14 @@ def get_loader(transform,
     # Based on mode (train, val, test), obtain img_folder and annotations_file.
     if mode == 'train':
         if vocab_from_file==True: assert os.path.exists(vocab_file), "vocab_file does not exist.  Change vocab_from_file to False to create vocab_file."
-        # run on udacity env
-        # img_folder = os.path.join(cocoapi_loc, 'cocoapi/images/train2014/')
-        # annotations_file = os.path.join(cocoapi_loc, 'cocoapi/annotations/captions_train2014.json')
-        # run on local env
-        img_folder = os.path.join(cocoapi_loc, 'coco_dataset/coco_train2014/')
-        annotations_file = os.path.join(cocoapi_loc, 'coco_dataset/annotations/captions_train2014.json')
+        img_folder = os.path.join(cocoapi_loc, 'cocoapi/images/train2014/')
+        annotations_file = os.path.join(cocoapi_loc, 'cocoapi/annotations/captions_train2014.json')
     if mode == 'test':
         assert batch_size==1, "Please change batch_size to 1 if testing your model."
         assert os.path.exists(vocab_file), "Must first generate vocab.pkl from training data."
         assert vocab_from_file==True, "Change vocab_from_file to True."
-        # run on udacity env
-        # img_folder = os.path.join(cocoapi_loc, 'cocoapi/images/test2014/')
-        # annotations_file = os.path.join(cocoapi_loc, 'cocoapi/annotations/image_info_test2014.json')
-        # run on local env
-        img_folder = os.path.join(cocoapi_loc, 'coco_dataset/coco_test2014/')
-        annotations_file = os.path.join(cocoapi_loc, 'coco_dataset/annotations/image_info_test2014.json')
+        img_folder = os.path.join(cocoapi_loc, 'cocoapi/images/test2014/')
+        annotations_file = os.path.join(cocoapi_loc, 'cocoapi/annotations/image_info_test2014.json')
 
     # COCO caption dataset.
     dataset = CoCoDataset(transform=transform,
